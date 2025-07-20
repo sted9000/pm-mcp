@@ -1,0 +1,37 @@
+# PM-MCP Configuration Example
+# Copy this file to config.yaml and fill in your actual credentials
+
+# Slack configuration
+slack:
+  token: "xoxb-your-slack-bot-token-here"
+  # To get a Slack bot token:
+  # 1. Go to https://api.slack.com/apps
+  # 2. Create a new app or select existing
+  # 3. Add OAuth scopes: channels:history, channels:read, groups:history, groups:read
+  # 4. Install app to workspace and copy the bot token
+
+# Project definitions
+projects:
+  - name: "Example Project"
+    slack_channel: "C1234567890"  # Slack channel ID (not name)
+    # Find channel ID: Right-click channel > View channel details
+    
+  - name: "Another Project"
+    slack_channel: "C0987654321"
+    
+  # Add more projects as needed
+  # Future fields per project:
+  # github_repo: "owner/repo"
+  # google_docs_folder: "folder-id"
+  # meeting_calendar_id: "calendar@group.calendar.google.com"
+
+# Future service configurations (not yet implemented)
+# github:
+#   token: "ghp_your_github_personal_access_token"
+#   
+# google:
+#   credentials_path: "path/to/google-credentials.json"
+#   
+# meeting_transcriptions:
+#   service: "zoom"  # or "teams", "meet"
+#   api_key: "your-api-key"
