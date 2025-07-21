@@ -57,25 +57,38 @@ class SlackService:
             print(f"Error fetching conversation history: {e}")
             raise
     
-    def get_all_messages(self, channel_id: str, oldest: Optional[str] = None) -> List[Dict[str, Any]]:
+    def get_all_messages(self, channel_id: str, oldest: Optional[str] = None, latest: Optional[str] = None) -> List[Dict[str, Any]]:
         """
         Fetch all messages from a channel, handling pagination automatically.
         
         Args:
             channel_id: The ID of the channel/conversation
             oldest: Only fetch messages after this Unix timestamp
+            latest: Only fetch messages before this Unix timestamp
             
         Returns:
             List of all messages in the channel
         """
         messages = []
         cursor = None
+
+        # Turn datetime strings into Unix timestamps
+        if oldest:
+            print(f"Oldest: {oldest}")
+            oldest = int(oldest.timestamp())
+            print(f"Oldest: {oldest}")
+        if latest:
+            print(f"Latest: {latest}")
+            latest = int(latest.timestamp())
+            print(f"Latest: {latest}")
+
         
         while True:
             response = self.get_conversation_history(
                 channel_id=channel_id,
                 limit=1000,
                 oldest=oldest,
+                latest=latest,
                 cursor=cursor
             )
             
